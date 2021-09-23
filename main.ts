@@ -1,7 +1,7 @@
 import { getDollarValue } from "./dolarService"
 import { getEuroValue } from './euroService'
 
-const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require('node-telegram-bot-api')
 
 const token = '2043076845:AAEkmk2HHBqB48vbsf6j7K_U4rrU125PL5U';
 const bot = new TelegramBot(token, {polling: true});
