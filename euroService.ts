@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const GET_EURO_URL = 'https://economia.awesomeapi.com.br/last/EUR-BRL';
+const GET_EURO_URL = 'https://economia.awesomeapi.com.br/last/EUR-BRL'
 
 
 export const getEuroValue = async (): Promise<number> =>{
