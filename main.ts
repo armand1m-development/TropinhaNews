@@ -1,8 +1,15 @@
 import TelegramBot from 'node-telegram-bot-api';
+import dotenv from 'dotenv'
+import express from 'express'
+
 import { currency } from './currencyService';
 
-const token = '2043076845:AAEkmk2HHBqB48vbsf6j7K_U4rrU125PL5U';
-const bot = new TelegramBot(token, {polling: true});
+dotenv.config()
+const app = express()
+
+const { TELEGRAM_TOKEN, PORT } = process.env;
+
+const bot = new TelegramBot(TELEGRAM_TOKEN, {polling: true});
 
 bot.on('message', async(msg: any) => {
     const chatId = msg.chat.id;
@@ -17,3 +24,11 @@ bot.on('message', async(msg: any) => {
         bot.sendMessage(chatId, `Preço euro atual: ${euroValue}`)
     }
 });
+
+app.get('/health-check', (req, res) => {
+    res.send('is up!')
+  })
+
+  app.listen(PORT || 5000, () => {
+    console.log(`started at http://localhost:${PORT}`)
+  })
