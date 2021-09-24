@@ -26,7 +26,7 @@ bot.on('message', async(msg: any) => {
 
     if(msg.text === '/bitcoin'){
         const bitcoinValue = await currency.getBitcoinValue()
-        bot.sendMessage(chatId,`Preço Euro atual: ${bitcoinValue}`)
+        bot.sendMessage(chatId,`Preço Bitcoin atual: ${bitcoinValue}`)
     }
 });
 
