@@ -4,10 +4,13 @@ type AvailableCurrency = 'USD-BRL' | 'EUR-BRL'
 
 const currencyIntl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
 
+export const getCurrencyUrl = (currency: AvailableCurrency) => `https://economia.awesomeapi.com.br/last/${currency}`
+export const getValueName = (currency: AvailableCurrency) => currency.replace('-', '')
+
 const getCurrencyValue = async (currency: AvailableCurrency): Promise<string> => {
-    const currencyUrl = `https://economia.awesomeapi.com.br/last/${currency}`
-    const valueName = currency.replace('-', '')
-    const response = await axios.get(currencyUrl)
+    const url = getCurrencyUrl(currency)
+    const valueName = getValueName(currency)
+    const response = await axios.get(url)
 
     const currencyValue = Number(response.data[valueName].ask)
 
