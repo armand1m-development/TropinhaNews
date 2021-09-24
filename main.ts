@@ -9,7 +9,7 @@ const app = express()
 
 const { TELEGRAM_TOKEN, PORT } = process.env;
 
-const bot = new TelegramBot(TELEGRAM_TOKEN, {polling: true});
+const bot = new TelegramBot(TELEGRAM_TOKEN || '', {polling: true});
 
 bot.on('message', async(msg: any) => {
     const chatId = msg.chat.id;
@@ -25,7 +25,7 @@ bot.on('message', async(msg: any) => {
     }
 });
 
-app.get('/health-check', (req, res) => {
+app.get('/health-check', (_: any, res: any) => {
     res.send('is up!')
   })
 
