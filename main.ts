@@ -16,12 +16,17 @@ bot.on('message', async(msg: any) => {
 
     if (msg.text === '/dolar') {
         const dollarValue = await currency.getDolarValue()
-        bot.sendMessage(chatId, `Preço dolar atual: ${dollarValue}`)
+        bot.sendMessage(chatId, `Preço Dolar atual: ${dollarValue}`)
     }
 
     if(msg.text === '/euro'){
         const euroValue = await currency.getEuroValue()
-        bot.sendMessage(chatId, `Preço euro atual: ${euroValue}`)
+        bot.sendMessage(chatId, `Preço Euro atual: ${euroValue}`)
+    }
+
+    if(msg.text === '/bitcoin'){
+        const bitcoinValue = await currency.getBitcoinValue()
+        bot.sendMessage(chatId,`Preço Euro atual: ${bitcoinValue}`)
     }
 });
 
