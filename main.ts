@@ -4,6 +4,8 @@ import express from 'express'
 import cron from 'node-cron'
 import { currency } from './currencyService';
 import { generateReport } from './reportMaker';
+import {city, getClimateValue } from './climateService'
+
 
 dotenv.config()
 const app = express()
@@ -34,6 +36,11 @@ bot.on('message', async(msg: any) => {
 
     if(msg.text === '/get-report') {
         bot.sendMessage(chatId, await generateReport())
+    }
+
+    if (msg.text === '/TemperaturaVix'){
+        const temperature = await getClimateValue('Vitoria')
+        bot.sendMessage(chatId,`Temperatura de Vitoria: ${temperature}`)
     }
 
     if(msg.text === '/subscribe-news') {

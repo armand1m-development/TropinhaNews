@@ -5,8 +5,8 @@ type AvailableCurrency = 'USD-BRL' | 'EUR-BRL'
 const currencyIntl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
 
 export const getCurrencyUrl = (currency: AvailableCurrency) => `https://economia.awesomeapi.com.br/last/${currency}`
-export const getCurrencyUrlBitcoin = 'https://www.mercadobitcoin.net/api/BTC/ticker/'
 export const getValueName = (currency: AvailableCurrency) => currency.replace('-', '')
+export const getCurrencyUrlBitcoin = 'https://www.mercadobitcoin.net/api/BTC/ticker/'
 
 
 const getCurrencyValue = async (currency: AvailableCurrency): Promise<string> => {
