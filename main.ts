@@ -4,7 +4,7 @@ import express from 'express'
 import cron from 'node-cron'
 import { currency } from './currencyService';
 import { generateReport } from './reportMaker';
-import {city, getClimateValue } from './climateService'
+import { getClimateValue } from './climateService'
 
 
 dotenv.config()
@@ -15,10 +15,21 @@ const { TELEGRAM_TOKEN, PORT } = process.env;
 const bot = new TelegramBot(TELEGRAM_TOKEN || '', {polling: true});
 
 const subscribed:Array<number> = []
+const commandPartsRegex = /^\/([^@\s]+)@?(?:(\S+)|)\s?([\s\S]+)?$/i;
 
 bot.on('message', async(msg: any) => {
     const chatId = msg.chat.id;
+    const messageText = msg.text;
 
+    const parts = commandPartsRegex.exec(messageText);
+
+    
+    const command = parts === null ? {} :  {
+      text: messageText,
+      command: parts[1],
+      bot: parts[2],
+      args: parts[3],
+    };
     if (msg.text === '/dolar') {
         const dollarValue = await currency.getDolarValue()
         bot.sendMessage(chatId, `Preço Dolar atual: ${dollarValue}`)
@@ -38,9 +49,10 @@ bot.on('message', async(msg: any) => {
         bot.sendMessage(chatId, await generateReport())
     }
 
-    if (msg.text === '/TemperaturaVix'){
-        const temperature = await getClimateValue('Vitoria')
-        bot.sendMessage(chatId,`Temperatura de Vitoria: ${temperature}`)
+    if (command.command === 'Temperatura'){
+        const city = command.args
+        const temperature = await getClimateValue(city)
+        bot.sendMessage(chatId,`Temperatura da cidade: ${temperature}ºC`)
     }
 
     if(msg.text === '/subscribe-news') {
