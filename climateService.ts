@@ -7,7 +7,6 @@ export const getClimateUrl = (city: MainCity) => `https://api.openweathermap.org
 
 export const getClimateValue = async (city: MainCity) => {
     const url = getClimateUrl(city)
-    console.log(url)
     const resultClimate = await axios.get(url)
 
     const temperature = resultClimate.data.main.temp
