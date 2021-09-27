@@ -9,14 +9,18 @@ export const getValueName = (currency: AvailableCurrency) => currency.replace('-
 export const getCurrencyUrlBitcoin = 'https://www.mercadobitcoin.net/api/BTC/ticker/'
 
 
-const getCurrencyValue = async (currency: AvailableCurrency): Promise<string> => {
+const getCurrencyValue = async (currency: AvailableCurrency, Format: boolean = true): Promise<string | number> => {
     const url = getCurrencyUrl(currency)
     const valueName = getValueName(currency)
     const response = await axios.get(url)
 
     const currencyValue = Number(response.data[valueName].ask)
 
-    return currencyIntl.format(Math.round(currencyValue * 100) / 100)
+    if (Format){
+        return currencyIntl.format(Math.round(currencyValue * 100) / 100)
+    }
+
+    return currencyValue
 }
 
 const getCurrencyValueBitcoin = async ():Promise<string> =>{
@@ -31,5 +35,6 @@ const getCurrencyValueBitcoin = async ():Promise<string> =>{
 export const currency = {
     getDolarValue: () => getCurrencyValue('USD-BRL'),
     getEuroValue: () => getCurrencyValue('EUR-BRL'),
-    getBitcoinValue: () => getCurrencyValueBitcoin() 
+    getBitcoinValue: () => getCurrencyValueBitcoin(), 
+    getCurrencyValue,
 }

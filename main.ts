@@ -55,6 +55,14 @@ bot.on('message', async(msg: any) => {
         bot.sendMessage(chatId,`Temperatura da cidade: ${temperature}ºC`)
     }
 
+    if(command.command === 'ConverterDolar'){
+        const dollarValue = Number(command.args); 
+        const currentValue = await currency.getCurrencyValue('USD-BRL', false)
+        const totalDoll = Number(currentValue) * dollarValue
+        bot.sendMessage(chatId,`Seu valor convertido é: R$${totalDoll.toFixed(2)}`)
+
+    }
+
     if(msg.text === '/subscribe-news') {
         if (subscribed.includes(chatId)) {
             bot.sendMessage(chatId, 'Already subscribed')
