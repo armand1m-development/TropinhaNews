@@ -40,7 +40,7 @@ bot.on('message', async(msg: any) => {
 
     if (msg.text === '/TemperaturaVix'){
         const temperature = await getClimateValue('Vitoria')
-        bot.sendMessage(chatId,`Temperatura de Vitoria: ${temperature}`)
+        bot.sendMessage(chatId,`Temperatura de Vitoria: ${temperature}ºC`)
     }
 
     if(msg.text === '/subscribe-news') {
