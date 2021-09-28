@@ -63,6 +63,14 @@ bot.on('message', async(msg: any) => {
 
     }
 
+    if(command.command === 'converteuro'){
+        const euroValue = Number(command.args); 
+        const currentValue = await currency.getCurrencyValue('EUR-BRL', false)
+        const totalEuro = Number(currentValue) * euroValue
+        bot.sendMessage(chatId,`Seu valor convertido é: R$${totalEuro.toFixed(2)}`)
+
+    }
+
     if(msg.text === '/subscribe-news') {
         if (subscribed.includes(chatId)) {
             bot.sendMessage(chatId, 'Already subscribed')
