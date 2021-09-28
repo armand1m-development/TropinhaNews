@@ -49,13 +49,13 @@ bot.on('message', async(msg: any) => {
         bot.sendMessage(chatId, await generateReport())
     }
 
-    if (command.command === 'Temperatura'){
+    if (command.command === 'temp'){
         const city = command.args
         const temperature = await getClimateValue(city)
         bot.sendMessage(chatId,`Temperatura da cidade: ${temperature}ºC`)
     }
 
-    if(command.command === 'ConverterDolar'){
+    if(command.command === 'convertdoll'){
         const dollarValue = Number(command.args); 
         const currentValue = await currency.getCurrencyValue('USD-BRL', false)
         const totalDoll = Number(currentValue) * dollarValue
