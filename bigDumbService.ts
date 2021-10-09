@@ -1,21 +1,22 @@
 import axios from 'axios'
 
-const API_URL = 'https://tropinha.herokuapp.com/api'
-const TROPINHA_TOKEN = 'b34a580f34774d8e7b8f8f7dbabbc1b70ec779ec010d8765aab2d75698252d2f'
+const getApiUrl = () => process.env.API_URL;
+const getTropinhaToken = () => process.env.TROPINHA_TOKEN;
 
 export const getCurrentDumb = async () => {
-    const url = `${API_URL}/dumb`;
+
+    const url = `${getApiUrl()}/dumb`;
 
     try {
         const res = await axios.get(url, {
             headers: {
-                'Tropinha-token': TROPINHA_TOKEN
+                'Tropinha-token': getTropinhaToken()
             }
         });
 
 
         if(res.data.hasDumb){
-            return `Burrão atual: ${res.data.dumb.user}`
+            return `Burrão atual: ${res.data.dumb.user} \nFoi burrão: ${res.data.dumbTimes} vez(es)`
         }
 
         return `${res.data.message}`
@@ -29,13 +30,13 @@ type User = string
  
 
 export const setCurrentDumb = async (user: User) => {
-    const url = `${API_URL}/dumb`;
+    const url = `${getApiUrl()}/dumb`;
 
     let message = '';
 
     const res = await axios.post(url, {user: user}, {
         headers: {
-            'Tropinha-token': TROPINHA_TOKEN
+            'Tropinha-token': getTropinhaToken()
         }
     }).then((response) => {
         message = `${response.data.message}`
