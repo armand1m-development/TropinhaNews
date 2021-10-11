@@ -5,6 +5,7 @@ import cron from 'node-cron'
 import { currency } from './currencyService';
 import { generateReport } from './reportMaker';
 import { getClimateValue } from './climateService'
+import { getCurrentDumb, setCurrentDumb } from './bigDumbService';
 
 
 dotenv.config()
@@ -30,7 +31,7 @@ bot.on('message', async(msg: any) => {
       bot: parts[2],
       args: parts[3],
     };
-    if (msg.text === '/dolar') {
+    if (msg.text === '/dolares') {
         const dollarValue = await currency.getDolarValue()
         bot.sendMessage(chatId, `Preço Dolar atual: ${dollarValue}`)
     }
@@ -67,6 +68,17 @@ bot.on('message', async(msg: any) => {
         const currentValue = await currency.getCurrencyValue('EUR-BRL', false)
         const totalEuro = Number(currentValue) * euroValue
         bot.sendMessage(chatId,`Seu valor convertido é: R$${totalEuro.toFixed(2)}`)
+    }
+
+    if (msg.text === '/burrao') {
+        const responseDumb = await getCurrentDumb()
+        bot.sendMessage(chatId, responseDumb)
+    }
+
+    if (command.command === 'setBurrao'){
+        const user = command.args
+        const responseDumb = await setCurrentDumb(user)
+        bot.sendMessage(chatId, responseDumb)
     }
 
     if(msg.text === '/subscribe-news') {
