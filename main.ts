@@ -62,6 +62,10 @@ bot.on('message', async(msg: any) => {
 
     if(command.command === 'convertdoll'){
         const dollarValue = Number(command.args); 
+        if( isNaN(dollarValue)){
+            bot.sendMessage(chatId,'Numero nao invalido')
+            return
+        }
         const currentValue = await currency.getCurrencyValue('USD-BRL', false)
         const totalDoll = Number(currentValue) * dollarValue
         bot.sendMessage(chatId,`Seu valor convertido é: R$${totalDoll.toFixed(2)}`)
