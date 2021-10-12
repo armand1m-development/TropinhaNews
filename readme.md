@@ -3,7 +3,6 @@
 #### `Please check the rules to contribute!!!!!!`
 
 <br/>
-<br/>
 
 ## Links
 
@@ -11,13 +10,9 @@
 
 ### [HEALTH-CHECK](https://tropinha-news.herokuapp.com/health-check)
 
-<br/>
-
 ## Lint
 
 We are using prettier to lint our code, so make sure to run `yarn lint` before do the push, also you can add the prettier to your vscode
-
-<br/>
 
 ## Commands
 
@@ -27,12 +22,8 @@ We are using prettier to lint our code, so make sure to run `yarn lint` before d
 - `yarn test:ci` - run the test in ci mode
 - `yarn lint` - run prettier
 
-<br/>
-
 ## Rules to contribute
 
 Create a branch with the name of your featue/fix.. and open a pr, make sure that the ci is green and ask for some review
 
 _**YOU NEED ONE APPROVAL TO MERGE, IF YOU MERGED BY MISTAKE, PLEASE IMMEDIATELY REVERT YOUR COMMIT YOUR CALL SOMEONE TO DO IT**_
-
-<br/>
