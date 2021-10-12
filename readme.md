@@ -4,10 +4,10 @@
 
 ## Commands
 
--   yarn start - start the server on the port setted on the env (if not setted the default port is 5000)
--   yarn start:mon - start the server with monitoring
--   yarn test - run the unit tests
--   yarn test:ci - run the test in ci mode
+- yarn start - start the server on the port setted on the env (if not setted the default port is 5000)
+- yarn start:mon - start the server with monitoring
+- yarn test - run the unit tests
+- yarn test:ci - run the test in ci mode
 
 ## Rules to contribute
 
