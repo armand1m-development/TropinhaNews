@@ -31,7 +31,7 @@ bot.on('message', async(msg: any) => {
       bot: parts[2],
       args: parts[3],
     };
-    if (msg.text === '/dolares') {
+    if (msg.text === '/doll') {
         const dollarValue = await currency.getDolarValue()
         bot.sendMessage(chatId, `Preço Dolar atual: ${dollarValue}`)
     }
@@ -52,9 +52,13 @@ bot.on('message', async(msg: any) => {
 
     if (command.command === 'temp'){
         const city = command.args
-        const temperature = await getClimateValue(city)
-        bot.sendMessage(chatId,`Temperatura da cidade: ${temperature}ºC`)
-    }
+       try {
+          const temperature = await getClimateValue(city)
+          bot.sendMessage(chatId,`Temperatura da cidade: ${temperature}ºC`)
+       } catch {
+          bot.sendMessage(chatId,'City nao localizada, cuidado burrao')
+       }    
+    } 
 
     if(command.command === 'convertdoll'){
         const dollarValue = Number(command.args); 
