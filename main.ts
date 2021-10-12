@@ -2,10 +2,11 @@ import TelegramBot from "node-telegram-bot-api";
 import dotenv from "dotenv";
 import express from "express";
 import cron from "node-cron";
-import { currency } from "./currencyService";
+
+import { currency } from "./services/currencyService";
 import { generateReport } from "./reportMaker";
-import { getClimateValue } from "./climateService";
-import { getCurrentDumb, setCurrentDumb } from "./bigDumbService";
+import { getClimateValue } from "./services/climateService";
+import { getCurrentDumb, setCurrentDumb } from "./services/bigDumbService";
 
 dotenv.config();
 const app = express();
