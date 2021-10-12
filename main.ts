@@ -62,7 +62,7 @@ bot.on('message', async(msg: any) => {
 
     if(command.command === 'convertdoll'){
         const dollarValue = Number(command.args); 
-        if( isNaN(dollarValue)){
+        if(isNaN(dollarValue)){
             bot.sendMessage(chatId,'Numero nao invalido')
             return
         }
@@ -72,7 +72,11 @@ bot.on('message', async(msg: any) => {
     }
 
     if(command.command === 'converteuro'){
-        const euroValue = Number(command.args); 
+        const euroValue = Number(command.args);
+        if(isNaN(euroValue)){
+            bot.sendMessage(chatId,'Numero nao invalido')
+            return
+        } 
         const currentValue = await currency.getCurrencyValue('EUR-BRL', false)
         const totalEuro = Number(currentValue) * euroValue
         bot.sendMessage(chatId,`Seu valor convertido é: R$${totalEuro.toFixed(2)}`)
