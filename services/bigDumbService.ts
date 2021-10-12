@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const getApiUrl = () => process.env.API_URL;
-const getTropinhaToken = () => process.env.TROPINHA_TOKEN;
+const API_URL = process.env.API_URL;
+const TROPINHA_TOKEN = process.env.TROPINHA_TOKEN;
 
 export const getCurrentDumb = async () => {
-  const url = `${getApiUrl()}/dumb`;
+  const url = `${API_URL}/dumb`;
 
   try {
     const res = await axios.get(url, {
       headers: {
-        "Tropinha-token": getTropinhaToken(),
+        "Tropinha-token": TROPINHA_TOKEN,
       },
     });
 
@@ -26,7 +26,7 @@ export const getCurrentDumb = async () => {
 type User = string;
 
 export const setCurrentDumb = async (user: User) => {
-  const url = `${getApiUrl()}/dumb`;
+  const url = `${API_URL}/dumb`;
 
   let message = "";
 
@@ -36,7 +36,7 @@ export const setCurrentDumb = async (user: User) => {
       { user: user },
       {
         headers: {
-          "Tropinha-token": getTropinhaToken(),
+          "Tropinha-token": TROPINHA_TOKEN,
         },
       }
     )
