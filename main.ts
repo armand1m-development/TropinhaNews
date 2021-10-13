@@ -31,7 +31,7 @@ bot.on('message', async(msg: any) => {
       bot: parts[2],
       args: parts[3],
     };
-    if (msg.text === '/dolares') {
+    if (msg.text === '/dolar') {
         const dollarValue = await currency.getDolarValue()
         bot.sendMessage(chatId, `Preço Dolar atual: ${dollarValue}`)
     }
@@ -52,19 +52,31 @@ bot.on('message', async(msg: any) => {
 
     if (command.command === 'temp'){
         const city = command.args
-        const temperature = await getClimateValue(city)
-        bot.sendMessage(chatId,`Temperatura da cidade: ${temperature}ºC`)
-    }
+       try {
+          const temperature = await getClimateValue(city)
+          bot.sendMessage(chatId,`Temperatura da cidade: ${temperature}ºC`)
+       } catch {
+          bot.sendMessage(chatId,'City nao localizada, cuidado burrao')
+       }    
+    } 
 
     if(command.command === 'convertdoll'){
         const dollarValue = Number(command.args); 
+        if(isNaN(dollarValue)){
+            bot.sendMessage(chatId,'Numero nao invalido')
+            return
+        }
         const currentValue = await currency.getCurrencyValue('USD-BRL', false)
         const totalDoll = Number(currentValue) * dollarValue
         bot.sendMessage(chatId,`Seu valor convertido é: R$${totalDoll.toFixed(2)}`)
     }
 
     if(command.command === 'converteuro'){
-        const euroValue = Number(command.args); 
+        const euroValue = Number(command.args);
+        if(isNaN(euroValue)){
+            bot.sendMessage(chatId,'Numero nao invalido')
+            return
+        } 
         const currentValue = await currency.getCurrencyValue('EUR-BRL', false)
         const totalEuro = Number(currentValue) * euroValue
         bot.sendMessage(chatId,`Seu valor convertido é: R$${totalEuro.toFixed(2)}`)
