@@ -3,13 +3,14 @@ import axios from "axios";
 const API_URL = process.env.API_URL;
 const TROPINHA_TOKEN = process.env.TROPINHA_TOKEN;
 
-export const getCurrentDumb = async () => {
+export const getCurrentDumb = async (chatId: string) => {
   const url = `${API_URL}/dumb`;
 
   try {
     const res = await axios.get(url, {
       headers: {
         "Tropinha-token": TROPINHA_TOKEN,
+        "Channel-id": chatId,
       },
     });
 
@@ -23,9 +24,7 @@ export const getCurrentDumb = async () => {
   }
 };
 
-type User = string;
-
-export const setCurrentDumb = async (user: User) => {
+export const setCurrentDumb = async (user: string, chatId: string) => {
   const url = `${API_URL}/dumb`;
 
   let message = "";
@@ -37,6 +36,7 @@ export const setCurrentDumb = async (user: User) => {
       {
         headers: {
           "Tropinha-token": TROPINHA_TOKEN,
+          "Channel-id": chatId,
         },
       }
     )
