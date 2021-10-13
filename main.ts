@@ -83,13 +83,13 @@ bot.on('message', async(msg: any) => {
     }
 
     if (msg.text === '/burrao') {
-        const responseDumb = await getCurrentDumb(chatId)
+        const responseDumb = await getCurrentDumb()
         bot.sendMessage(chatId, responseDumb)
     }
 
     if (command.command === 'setBurrao'){
         const user = command.args
-        const responseDumb = await setCurrentDumb(chatId, user)
+        const responseDumb = await setCurrentDumb(user)
         bot.sendMessage(chatId, responseDumb)
     }
 
