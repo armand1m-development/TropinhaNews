@@ -31,7 +31,7 @@ bot.on('message', async(msg: any) => {
       bot: parts[2],
       args: parts[3],
     };
-    if (msg.text === '/doll') {
+    if (msg.text === '/dolar') {
         const dollarValue = await currency.getDolarValue()
         bot.sendMessage(chatId, `Preço Dolar atual: ${dollarValue}`)
     }
