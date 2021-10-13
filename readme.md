@@ -26,4 +26,4 @@ We are using prettier to lint our code, so make sure to run `yarn lint` before d
 
 Create a branch with the name of your featue/fix.. and open a pr, make sure that the ci is green and ask for some review
 
-_**YOU NEED ONE APPROVAL TO MERGE, IF YOU MERGED BY MISTAKE, PLEASE IMMEDIATELY REVERT YOUR COMMIT YOUR CALL SOMEONE TO DO IT**_
+_**YOU NEED ONE APPROVAL TO MERGE, IF YOU MERGED BY MISTAKE, PLEASE IMMEDIATELY REVERT YOUR COMMIT OR CALL SOMEONE TO DO IT**_
