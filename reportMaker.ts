@@ -1,4 +1,4 @@
-import { currency } from "./currencyService";
+import { currency } from "./services/currencyService";
 
 export const generateReport = async () => {
   const dollarValue = await currency.getDolarValue();
