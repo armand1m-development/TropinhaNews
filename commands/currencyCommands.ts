@@ -16,4 +16,32 @@ export const currencyCommands = {
     const bitcoinValue = await currency.getBitcoinValue();
     bot.sendMessage(chatId, `Preço Bitcoin atual: ${bitcoinValue}`);
   },
+
+  convertdoll: async ({ bot, chatId, command }: CommandProps) => {
+    const dollarValue = Number(command.args);
+    if (isNaN(dollarValue)) {
+      bot.sendMessage(chatId, "Numero nao invalido");
+      return;
+    }
+    const currentValue = await currency.getCurrencyValue("USD-BRL", false);
+    const totalDoll = Number(currentValue) * dollarValue;
+    bot.sendMessage(
+      chatId,
+      `Seu valor convertido é: R$${totalDoll.toFixed(2)}`
+    );
+  },
+
+  converteuro: async ({ bot, chatId, command }: CommandProps) => {
+    const euroValue = Number(command.args);
+    if (isNaN(euroValue)) {
+      bot.sendMessage(chatId, "Numero nao invalido");
+      return;
+    }
+    const currentValue = await currency.getCurrencyValue("EUR-BRL", false);
+    const totalEuro = Number(currentValue) * euroValue;
+    bot.sendMessage(
+      chatId,
+      `Seu valor convertido é: R$${totalEuro.toFixed(2)}`
+    );
+  },
 };
