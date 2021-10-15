@@ -19,7 +19,7 @@ const commandParserRegex = /^\/([^@\s]+)@?(?:(\S+)|)\s?([\s\S]+)?$/i;
 
 bot.on("message", async (msg: any) => {
   const chatId = msg.chat.id;
-  const username = msg.chat.username;
+  const username = msg.chat.username || msg.from.username;
   const messageText: string = msg.text;
   const parsedCommand = commandParserRegex.exec(messageText) || undefined;
 
