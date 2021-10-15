@@ -20,6 +20,7 @@ const commandPartsRegex = /^\/([^@\s]+)@?(?:(\S+)|)\s?([\s\S]+)?$/i;
 
 bot.on("message", async (msg: any) => {
   const chatId = msg.chat.id;
+<<<<<<< Updated upstream
   const messageText = msg.text;
 
   const parts = commandPartsRegex.exec(messageText);
@@ -59,6 +60,28 @@ bot.on("message", async (msg: any) => {
       bot.sendMessage(chatId, `Temperatura da cidade: ${temperature}ºC`);
     } catch {
       bot.sendMessage(chatId, "City nao localizada, cuidado burrao");
+=======
+  const username = msg.chat.username || msg.from.username;
+  const messageText: string = msg.text;
+  const parsedCommand = commandParserRegex.exec(messageText) || undefined;
+
+  const command: Command | undefined = parsedCommand && {
+    full: messageText,
+    name: parsedCommand[1],
+    args: parsedCommand[3] && parsedCommand[3].trim(),
+  };
+
+  Object.keys(commands).map(async (commandName) => {
+    if (!!command && commandName === command.name) {
+      const commandPayload = { bot, chatId, command, username };
+
+      try {
+        await commands[commandName as CommandNames](commandPayload);
+      } catch (error) {
+        console.log(error);
+        bot.sendMessage(chatId, "Comando falhou :X");
+      }
+>>>>>>> Stashed changes
     }
   }
 
