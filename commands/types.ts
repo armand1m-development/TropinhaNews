@@ -2,6 +2,7 @@ export type CommandProps = {
   bot: any;
   chatId: string;
   command: Command;
+  username: string;
 };
 
 export type Command = {

@@ -19,6 +19,7 @@ const commandParserRegex = /^\/([^@\s]+)@?(?:(\S+)|)\s?([\s\S]+)?$/i;
 
 bot.on("message", async (msg: any) => {
   const chatId = msg.chat.id;
+  const username = msg.chat.username;
   const messageText: string = msg.text;
   const parsedCommand = commandParserRegex.exec(messageText) || undefined;
 
@@ -30,7 +31,7 @@ bot.on("message", async (msg: any) => {
 
   Object.keys(commands).map(async (commandName) => {
     if (!!command && commandName === command.name) {
-      const commandPayload = { bot, chatId, command };
+      const commandPayload = { bot, chatId, command, username };
 
       try {
         await commands[commandName as CommandNames](commandPayload);
