@@ -1,11 +1,11 @@
 import { climateCommands } from "./climateCommands";
 import { currencyCommands } from "./currencyCommands";
-import { tropinhaCommands } from "./tropinhaCommands";
 import { disorderCommands } from "./disorderCommands";
+import { bigDumbCommands } from "./bigDumbCommands";
 
 export const commands = {
+  ...bigDumbCommands,
   ...currencyCommands,
   ...climateCommands,
-  ...tropinhaCommands,
   ...disorderCommands
 };
