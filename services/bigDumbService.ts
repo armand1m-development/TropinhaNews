@@ -1,38 +1,36 @@
 import axios from "axios";
 
-const API_URL = process.env.API_URL;
+const API_URL = `${process.env.API_URL}/dumb`;
 const TROPINHA_TOKEN = process.env.TROPINHA_TOKEN;
 
 export const getCurrentDumb = async (chatId: string) => {
-  const url = `${API_URL}/dumb`;
+  const res = await axios.get(API_URL, {
+    headers: {
+      "Tropinha-token": TROPINHA_TOKEN,
+      "Channel-id": chatId,
+    },
+  });
 
-  try {
-    const res = await axios.get(url, {
-      headers: {
-        "Tropinha-token": TROPINHA_TOKEN,
-        "Channel-id": chatId,
-      },
-    });
-
-    if (res.data.hasDumb) {
-      return `Burrão atual: ${res.data.dumb.user} \nFoi burrão: ${res.data.dumbTimes} vez(es)`;
-    }
-
-    return `${res.data.message}`;
-  } catch {
-    return "Deu ruim na Api.";
+  if (res.data.hasDumb) {
+    return [`Burrão atual: ${res.data.dumb.user} \nFoi burrão ${res.data.dumbTimes} ${(res.data.dumbTimes > 1) ? 'vezes' : 'vez'}`];
   }
+
+  return [res.data.message];
 };
 
-export const setCurrentDumb = async (user: string, chatId: string) => {
-  const url = `${API_URL}/dumb`;
+export const setCurrentDumb = async (chatId: string, bot: any, msg: any) => {
+  let avatarUrl = false;
 
-  let message = "";
+  const username = msg.reply_to_message.from.username || msg.reply_to_message.from.first_name;
+  const profileAvatar = await bot.getUserProfilePhotos(msg.reply_to_message.from.id);
 
-  const res = await axios
-    .post(
-      url,
-      { user: user },
+  if (profileAvatar && profileAvatar.photos[0][0]) {
+    const file = profileAvatar.photos[0][2] || profileAvatar.photos[0][0];
+    const fileId = file.file_id;
+    avatarUrl = await bot.getFileStream(fileId);
+  }
+
+  return await axios.post(API_URL, { user: username, avatar: avatarUrl},
       {
         headers: {
           "Tropinha-token": TROPINHA_TOKEN,
@@ -41,11 +39,9 @@ export const setCurrentDumb = async (user: string, chatId: string) => {
       }
     )
     .then((response) => {
-      message = `${response.data.message}`;
+      return [response.data.message, avatarUrl];
     })
     .catch((error) => {
-      message = `${error.response.data.message}`;
-    });
-
-  return message;
+      return [error.response.data.message];
+  });
 };

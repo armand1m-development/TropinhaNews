@@ -18,9 +18,7 @@ const subscribed: Array<number> = [];
 const commandParserRegex = /^\/([^@\s]+)@?(?:(\S+)|)\s?([\s\S]+)?$/i;
 
 bot.on("message", async (msg: any) => {
-  console.log(msg);
   const chatId = msg.chat.id;
-  const username = msg.chat.username || msg.from.username || msg.from.first_name;
   const messageText: string = msg.text;
   const parsedCommand = commandParserRegex.exec(messageText) || undefined;
 
@@ -32,7 +30,7 @@ bot.on("message", async (msg: any) => {
 
   Object.keys(commands).map(async (commandName) => {
     if (!!command && commandName === command.name) {
-      const commandPayload = { bot, chatId, command, username };
+      const commandPayload = { bot, chatId, command, msg };
 
       try {
         await commands[commandName as CommandNames](commandPayload);
