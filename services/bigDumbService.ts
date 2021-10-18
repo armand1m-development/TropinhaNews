@@ -15,7 +15,7 @@ export const getCurrentDumb = async (chatId: string) => {
     return [`Burrão atual: ${res.data.dumb.user} \nFoi burrão ${res.data.dumbTimes} ${(res.data.dumbTimes > 1) ? 'vezes' : 'vez'}`];
   }
 
-  return [`${res.data.message}`];
+  return [res.data.message];
 };
 
 export const setCurrentDumb = async (chatId: string, bot: any, msg: any) => {
