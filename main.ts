@@ -28,6 +28,10 @@ bot.on("message", async (msg: any) => {
     args: parsedCommand[3] && parsedCommand[3].trim(),
   };
 
+  if (messageText === "significa?") {
+    bot.sendPhoto(chatId, "images/significa.jpg");
+  }
+
   Object.keys(commands).map(async (commandName) => {
     if (!!command && commandName === command.name) {
       const commandPayload = { bot, chatId, command, msg };
