@@ -7,7 +7,6 @@ export const climateCommands = {
 
     try {
       const temperature = await getClimateValue(city || "");
-      console.log(temperature);
       bot.sendMessage(chatId, `Temperatura da cidade: ${temperature}ºC`);
     } catch {
       bot.sendMessage(chatId, "City nao localizada, cuidado burrao");
