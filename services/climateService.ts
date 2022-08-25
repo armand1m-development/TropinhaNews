@@ -2,10 +2,10 @@ import axios from "axios";
 
 type MainCity = string;
 
-// const CLIMATE_TOKEN = process.env.CLIMATE_TOKEN;
+ const CLIMATE_TOKEN = process.env.CLIMATE_TOKEN;
 
 export const getClimateUrl = (city: MainCity) =>
-  `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3f97d7ef8fb43e049a8c95e27f22a52d&units=metric`;
+  `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${CLIMATE_TOKEN}&units=metric`;
 
 export const getClimateValue = async (city: MainCity) => {
   const url = getClimateUrl(city);

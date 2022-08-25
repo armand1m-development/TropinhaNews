@@ -50,7 +50,7 @@ app.get("/health-check", (_: any, res: any) => {
   res.send("is up!");
 });
 
-app.listen(PORT || 5000, () => {
+app.listen(PORT || 3000, () => {
   console.log(`###### Started at http://localhost:${PORT} ######`);
 });
 
