@@ -20,7 +20,7 @@ export const currencyCommands = {
   convertdoll: async ({ bot, chatId, command }: CommandProps) => {
     const dollarValue = Number(command.args);
     if (isNaN(dollarValue)) {
-      bot.sendMessage(chatId, "Numero nao invalido");
+      bot.sendMessage(chatId, "Argumento invalido. Digite um numero valido.");
       return;
     }
     const currentValue = await currency.getCurrencyValue("USD-BRL", false);
@@ -34,7 +34,7 @@ export const currencyCommands = {
   converteuro: async ({ bot, chatId, command }: CommandProps) => {
     const euroValue = Number(command.args);
     if (isNaN(euroValue)) {
-      bot.sendMessage(chatId, "Numero nao invalido");
+      bot.sendMessage(chatId, "Argumento invalido. Digite um numero valido.");
       return;
     }
     const currentValue = await currency.getCurrencyValue("EUR-BRL", false);
