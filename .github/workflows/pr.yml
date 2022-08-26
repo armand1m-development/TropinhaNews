@@ -2,7 +2,7 @@ name: Build and Test Bot
 on: [pull_request]
 jobs:
   build:
-    name: Build, lint, test and release on Node 16 
+    name: Build, lint and test on Node 16 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
