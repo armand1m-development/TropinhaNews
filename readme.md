@@ -13,7 +13,7 @@ Bot with quick everyday utilities and fun features made specifically for some fr
 ## Commands
 
 - `yarn start`: start server with the port defined in the env _(default port is 5000)_
-- `yarn dev`: start server with live reload 
+- `yarn dev`: start server with live reload
 - `yarn build`: builds the server code so it can be packaged
 - `yarn test`: run unit tests
 - `yarn lint`: run prettier checks

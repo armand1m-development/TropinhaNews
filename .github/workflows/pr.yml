@@ -2,19 +2,19 @@ name: Build and Test Bot
 on: [pull_request]
 jobs:
   build:
-    name: Build, lint and test on Node 16 
+    name: Build, lint and test on Node 16
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Use Node 16 
+      - name: Use Node 16
         uses: actions/setup-node@v1
         with:
-          node-version: 16 
+          node-version: 16
 
-      - name: Install dependencies 
-        run: yarn 
+      - name: Install dependencies
+        run: yarn
 
       - name: Build
         run: yarn build
@@ -25,5 +25,5 @@ jobs:
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
 
-      - name: Coverage 
-        run: npx codecov -f coverage/*.json 
+      - name: Coverage
+        run: npx codecov -f coverage/*.json

@@ -23,11 +23,11 @@ spec:
         # IMAGE:TAG will be replaced by kustomize
         # during CI to make sure it matches the
         # build image and tag
-        - image: IMAGE:TAG 
+        - image: IMAGE:TAG
           imagePullPolicy: IfNotPresent
           name: tropinha-news
           ports:
-          - containerPort: 5000
+            - containerPort: 5000
           livenessProbe:
             httpGet:
               path: /healthcheck
@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: tropinha-news-secrets
-                  key: telegram_token 
+                  key: telegram_token
             - name: TROPINHA_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -54,7 +54,7 @@ spec:
                 secretKeyRef:
                   name: tropinha-news-secrets
                   key: climate_token
-            - name: API_URL 
+            - name: API_URL
               valueFrom:
                 secretKeyRef:
                   name: tropinha-news-secrets
@@ -62,7 +62,7 @@ spec:
           resources:
             limits:
               cpu: 128m
-              memory: 128Mi 
+              memory: 128Mi
             requests:
               cpu: 64m
               memory: 64Mi
