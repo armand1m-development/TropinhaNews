@@ -7,5 +7,5 @@ export const commands = {
   ...bigDumbCommands,
   ...currencyCommands,
   ...climateCommands,
-  ...disorderCommands
+  ...disorderCommands,
 };

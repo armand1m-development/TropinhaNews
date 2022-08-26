@@ -1,5 +1,5 @@
-require("dotenv").config();
 import TelegramBot from "node-telegram-bot-api";
+require("dotenv").config();
 import express from "express";
 import cron from "node-cron";
 
@@ -40,13 +40,13 @@ bot.on("message", async (msg: any) => {
         await commands[commandName as CommandNames](commandPayload);
       } catch (error) {
         console.log(error);
-        bot.sendMessage(chatId, "Comando falhou :X");
+        bot.sendMessage(chatId, "Comando falhou :X _(cala a boca rafael)_");
       }
     }
   });
 });
 
-app.get("/health-check", (_: any, res: any) => {
+app.get("/healthcheck", (_: any, res: any) => {
   res.send("is up!");
 });
 
@@ -58,5 +58,5 @@ cron.schedule("0 0 8,12,16 * * *", () => {
   subscribed.map((chatId) => {
     bot.sendMessage(chatId, "Report!!");
   });
-  console.log("Sended report");
+  console.log("Report was sent.");
 });

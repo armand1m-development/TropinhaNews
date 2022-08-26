@@ -12,7 +12,11 @@ export const getCurrentDumb = async (chatId: string) => {
   });
 
   if (res.data.hasDumb) {
-    return [`Burrão atual: ${res.data.dumb.user} \nFoi burrão ${res.data.dumbTimes} ${(res.data.dumbTimes > 1) ? 'vezes' : 'vez'}`];
+    return [
+      `Burrão atual: ${res.data.dumb.user} \nFoi burrão ${res.data.dumbTimes} ${
+        res.data.dumbTimes > 1 ? "vezes" : "vez"
+      }`,
+    ];
   }
 
   return [res.data.message];
@@ -21,16 +25,22 @@ export const getCurrentDumb = async (chatId: string) => {
 export const setCurrentDumb = async (chatId: string, bot: any, msg: any) => {
   let avatarUrl = false;
 
-  const username = msg.reply_to_message.from.username || msg.reply_to_message.from.first_name;
-  const profileAvatar = await bot.getUserProfilePhotos(msg.reply_to_message.from.id);
+  const username =
+    msg.reply_to_message.from.username ?? msg.reply_to_message.from.first_name;
+  const profileAvatar = await bot.getUserProfilePhotos(
+    msg.reply_to_message.from.id
+  );
 
   if (profileAvatar && profileAvatar.photos[0][0]) {
-    const file = profileAvatar.photos[0][2] || profileAvatar.photos[0][0];
+    const file = profileAvatar.photos[0][2] ?? profileAvatar.photos[0][0];
     const fileId = file.file_id;
     avatarUrl = await bot.getFileStream(fileId);
   }
 
-  return await axios.post(API_URL, { user: username, avatar: avatarUrl},
+  return await axios
+    .post(
+      API_URL,
+      { user: username, avatar: avatarUrl },
       {
         headers: {
           "Tropinha-token": TROPINHA_TOKEN,
@@ -43,5 +53,5 @@ export const setCurrentDumb = async (chatId: string, bot: any, msg: any) => {
     })
     .catch((error) => {
       return [error.response.data.message];
-  });
+    });
 };
