@@ -12,14 +12,20 @@ const app = express();
 
 const { TELEGRAM_TOKEN, PORT } = process.env;
 
-const bot = new TelegramBot(TELEGRAM_TOKEN || "", { polling: true });
+if (!TELEGRAM_TOKEN) {
+  throw new Error(
+    "Please provide a telegram token bot in the TELEGRAM_TOKEN env var"
+  );
+}
+
+const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: true });
 
 const subscribed: Array<number> = [];
 const commandParserRegex = /^\/([^@\s]+)@?(?:(\S+)|)\s?([\s\S]+)?$/i;
 
-bot.on("message", async (msg: any) => {
+bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
-  const messageText: string = msg.text;
+  const messageText = msg.text ?? "";
   const parsedCommand = commandParserRegex.exec(messageText) || undefined;
 
   const command: Command | undefined = parsedCommand && {
@@ -50,8 +56,8 @@ app.get("/healthcheck", (_: any, res: any) => {
   res.send("is up!");
 });
 
-app.listen(PORT || 5000, () => {
-  console.log(`###### Started at http://localhost:${PORT} ######`);
+app.listen(PORT ?? 5000, () => {
+  console.log(`Bot running at http://0.0.0.0:${PORT}`);
 });
 
 cron.schedule("0 0 8,12,16 * * *", () => {

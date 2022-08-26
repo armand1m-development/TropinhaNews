@@ -1,11 +1,12 @@
 import axios from "axios";
+import TelegramBot from "node-telegram-bot-api";
 
 const url = `${process.env.API_URL}/disorder`;
 const token = `${process.env.TROPINHA_TOKEN}`;
 
-export const setDisorder = async (chatId: string, msg: any) => {
+export const setDisorder = async (chatId: number, msg: TelegramBot.Message) => {
   const username =
-    msg.chat.username ?? msg.from.username ?? msg.from.first_name;
+    msg.chat.username ?? msg.from?.username ?? msg.from?.first_name;
 
   const res = await axios.post(
     url,
@@ -21,7 +22,7 @@ export const setDisorder = async (chatId: string, msg: any) => {
   return `${res.data.message}`;
 };
 
-export const getDisorder = async (chatId: string) => {
+export const getDisorder = async (chatId: number) => {
   const res = await axios.get(url, {
     headers: {
       "Tropinha-token": token,

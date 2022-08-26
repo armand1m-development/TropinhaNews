@@ -1,8 +1,10 @@
+import TelegramBot from "node-telegram-bot-api";
+
 export type CommandProps = {
-  bot: any;
-  chatId: string;
+  bot: TelegramBot;
+  chatId: number;
   command: Command;
-  msg: any;
+  msg: TelegramBot.Message;
 };
 
 export type Command = {

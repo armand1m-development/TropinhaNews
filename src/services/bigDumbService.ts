@@ -1,9 +1,11 @@
 import axios from "axios";
+import TelegramBot from "node-telegram-bot-api";
+import { Readable } from "stream";
 
 const API_URL = `${process.env.API_URL}/dumb`;
 const TROPINHA_TOKEN = process.env.TROPINHA_TOKEN;
 
-export const getCurrentDumb = async (chatId: string) => {
+export const getCurrentDumb = async (chatId: number) => {
   const res = await axios.get(API_URL, {
     headers: {
       "Tropinha-token": TROPINHA_TOKEN,
@@ -22,25 +24,33 @@ export const getCurrentDumb = async (chatId: string) => {
   return [res.data.message];
 };
 
-export const setCurrentDumb = async (chatId: string, bot: any, msg: any) => {
-  let avatarUrl = false;
+export const setCurrentDumb = async (
+  chatId: number,
+  bot: TelegramBot,
+  msg: TelegramBot.Message
+) => {
+  let avatarFileStream: Readable | undefined = undefined;
 
-  const username =
-    msg.reply_to_message.from.username ?? msg.reply_to_message.from.first_name;
-  const profileAvatar = await bot.getUserProfilePhotos(
-    msg.reply_to_message.from.id
-  );
+  const replyUser = msg.reply_to_message?.from;
+
+  if (!replyUser) {
+    throw new Error("Failed to find user from reply message");
+  }
+
+  const username = replyUser.username ?? replyUser.first_name;
+
+  const profileAvatar = await bot.getUserProfilePhotos(replyUser.id);
 
   if (profileAvatar && profileAvatar.photos[0][0]) {
     const file = profileAvatar.photos[0][2] ?? profileAvatar.photos[0][0];
     const fileId = file.file_id;
-    avatarUrl = await bot.getFileStream(fileId);
+    avatarFileStream = bot.getFileStream(fileId);
   }
 
   return await axios
     .post(
       API_URL,
-      { user: username, avatar: avatarUrl },
+      { user: username, avatar: avatarFileStream },
       {
         headers: {
           "Tropinha-token": TROPINHA_TOKEN,
@@ -49,7 +59,7 @@ export const setCurrentDumb = async (chatId: string, bot: any, msg: any) => {
       }
     )
     .then((response) => {
-      return [response.data.message, avatarUrl];
+      return [response.data.message, avatarFileStream];
     })
     .catch((error) => {
       return [error.response.data.message];
