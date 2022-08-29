@@ -6,6 +6,7 @@ import cron from "node-cron";
 import { commands } from "./commands";
 import { Command } from "./commands/types";
 import path from "path";
+import { createReadStream } from "fs";
 
 type CommandNames = keyof typeof commands;
 
@@ -37,11 +38,13 @@ bot.on("message", async (msg) => {
 
   const pathSignificaImagem = path.resolve(
     process.cwd(),
-    "/images/significa.png"
+    "./images/significa.png"
   );
 
+  const imageReadStream = createReadStream(pathSignificaImagem);
+
   if (messageText === "significa?") {
-    bot.sendPhoto(chatId, pathSignificaImagem);
+    bot.sendPhoto(chatId, imageReadStream);
   }
 
   Object.keys(commands).map(async (commandName) => {
