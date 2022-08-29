@@ -30,6 +30,7 @@ bot.on("message", async (msg: any) => {
 
   if (messageText === "significa?") {
     bot.sendPhoto(chatId, "images/significa.jpg");
+    
   }
 
   Object.keys(commands).map(async (commandName) => {
