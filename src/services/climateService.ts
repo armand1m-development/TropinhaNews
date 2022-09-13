@@ -2,6 +2,7 @@ import axios from "axios";
 
 type MainCity = string
 
+
 const CLIMATE_TOKEN = process.env.CLIMATE_TOKEN;
 
 export const getClimateUrl = (city: MainCity) =>
