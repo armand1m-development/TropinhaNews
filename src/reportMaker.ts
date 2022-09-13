@@ -1,9 +1,9 @@
-import { currency } from "./services/currencyService";
+import { currencySimultaneous } from "./services/currencyService";
 
 export const generateReport = async () => {
-  const dollarValue = await currency.getDolarValue();
-  const euroValue = await currency.getEuroValue();
-  const bitcoinValue = await currency.getBitcoinValue();
+  const dollarValue = await currencySimultaneous.getDolarValue();
+  const euroValue = await currencySimultaneous.getEuroValue();
+  const bitcoinValue = await currencySimultaneous.getBitcoinValue();
 
   return `\uD83D\uDCB8\uD83D\uDCB8\uD83D\uDCB8   REPORT   \uD83D\uDCB8\uD83D\uDCB8\uD83D\uDCB8
 
