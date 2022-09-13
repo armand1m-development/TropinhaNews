@@ -36,11 +36,10 @@ const getCurrencyValueBitcoin = async (): Promise<string> => {
   const responseBitcoin = await axios.get(urlBitcoin);
 
   const currencyValue = Number(responseBitcoin.data.ticker.sell);
-
   return currencyIntl.format(Math.round(currencyValue * 100) / 100);
 };
 
-export const currency = {
+export const currencySimultaneous = {
   getDolarValue: () => getCurrencyValue("USD-BRL"),
   getEuroValue: () => getCurrencyValue("EUR-BRL"),
   getBitcoinValue: () => getCurrencyValueBitcoin(),
