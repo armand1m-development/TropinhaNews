@@ -4,12 +4,11 @@ import { CommandProps } from "./types";
 export const climateCommands = {
   temp: async ({ bot, chatId, command }: CommandProps) => {
     const city = command.args;
-
     try {
       const temperature = await getClimateValue(city || "");
-      bot.sendMessage(chatId, `Temperatura da cidade: ${temperature}ºC`);
+      bot.sendMessage(chatId, `Temperatura de ${city}: ${temperature}ºC`);
     } catch {
-      bot.sendMessage(chatId, "City nao localizada, cuidado burrao");
+      bot.sendMessage(chatId, "City nao localizada");
     }
   },
 };
