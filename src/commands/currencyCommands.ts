@@ -24,8 +24,11 @@ export const currencyCommands = {
       bot.sendMessage(chatId, "Argumento invalido. Digite um numero valido.");
       return;
     }
-    const currentValue = await currencySimultaneous.getCurrencyValue("USD-BRL", false);
-    console.log(currentValue)
+    const currentValue = await currencySimultaneous.getCurrencyValue(
+      "USD-BRL",
+      false
+    );
+    console.log(currentValue);
     const totalDoll = Number(currentValue) * dollarValue;
     bot.sendMessage(
       chatId,
@@ -39,28 +42,33 @@ export const currencyCommands = {
       bot.sendMessage(chatId, "Argumento invalido. Digite um numero valido.");
       return;
     }
-    const currentValue = await currencySimultaneous.getCurrencyValue("EUR-BRL", false);
+    const currentValue = await currencySimultaneous.getCurrencyValue(
+      "EUR-BRL",
+      false
+    );
     const totalEuro = Number(currentValue) * euroValue;
     bot.sendMessage(
       chatId,
       `Seu valor convertido é: R$${totalEuro.toFixed(2)}`
     );
   },
-      
-  convertbitcoin: async ({bot, chatId, command}: CommandProps) =>{
+
+  convertbitcoin: async ({ bot, chatId, command }: CommandProps) => {
     const bitcoinValue = Number(command.args);
     if (isNaN(bitcoinValue)) {
       bot.sendMessage(chatId, "Argumento invalido. Digite um numero valido.");
       return;
     }
     const currentValue = await currencySimultaneous.getBitcoinValue();
-    const convertBitcoin = currentValue.replace(/[R$.]/g, '').replace(',', ".");
-    const convertForNumber = parseFloat(convertBitcoin); 
-    const totalBitcoin =  convertForNumber * bitcoinValue;
+    const convertBitcoin = currentValue.replace(/[R$.]/g, "").replace(",", ".");
+    const convertForNumber = parseFloat(convertBitcoin);
+    const totalBitcoin = convertForNumber * bitcoinValue;
     bot.sendMessage(
       chatId,
-      `Seu valor convertido é: R$${totalBitcoin.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
+      `Seu valor convertido é: R$${totalBitcoin.toLocaleString("de-DE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}`
     );
-  }
-
+  },
 };

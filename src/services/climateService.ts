@@ -1,7 +1,6 @@
 import axios from "axios";
 
-type MainCity = string
-
+type MainCity = string;
 
 const CLIMATE_TOKEN = process.env.CLIMATE_TOKEN;
 
@@ -13,5 +12,5 @@ export const getClimateValue = async (city: MainCity) => {
   const resultClimate = await axios.get(url);
 
   const temperature = resultClimate.data.main.temp;
-  return temperature 
+  return temperature;
 };
