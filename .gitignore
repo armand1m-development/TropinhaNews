@@ -3,3 +3,5 @@ yarn-error.log
 .env
 build
 coverage
+package.json
+yarn.lock
