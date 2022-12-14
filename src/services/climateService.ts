@@ -13,7 +13,7 @@ export const getClimateValue = async (city: MainCity) => {
   const temperature = resultClimate.data.main.temp;
   const cityName = resultClimate.data.name;
   return { temperature, cityName };
-}; 
+};
 
 export type Forecast = {
   dt_txt: string;
@@ -38,4 +38,3 @@ export const getForecast = async (city: MainCity) => {
       )}Hrs - ${forecast.weather[0].description.toUpperCase()}`
   );
 };
-

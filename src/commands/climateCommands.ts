@@ -5,12 +5,13 @@ export const climateCommands = {
   temp: async ({ bot, chatId, command }: CommandProps) => {
     const city = command.args;
     try {
-      const { temperature, cityName } = await getClimateValue(city || '');
+      const { temperature, cityName } = await getClimateValue(city || "");
       bot.sendMessage(chatId, `Temperatura de ${cityName}: ${temperature}ºC`);
     } catch {
-      bot.sendMessage(chatId, 'City nao localizada');
+      bot.sendMessage(chatId, "City nao localizada");
     }
-  },previsao: async ({ bot, chatId, command }: CommandProps) => {
+  },
+  previsao: async ({ bot, chatId, command }: CommandProps) => {
     const city = command.args;
 
     try {
@@ -28,4 +29,3 @@ export const climateCommands = {
     }
   },
 };
-

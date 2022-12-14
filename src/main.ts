@@ -6,8 +6,8 @@ import { commands } from "./commands";
 import { Command } from "./commands/types";
 import path from "path";
 import { createReadStream } from "fs";
-import { bigdumbRoute } from "./routes/bigDumbRoute"
-import { disordersRoute } from "./routes/disorders"
+import { bigdumbRoute } from "./routes/bigDumbRoute";
+import { disordersRoute } from "./routes/disorders";
 
 type CommandNames = keyof typeof commands;
 
