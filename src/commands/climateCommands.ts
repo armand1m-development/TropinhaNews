@@ -1,5 +1,5 @@
-import { getClimateValue, getForecast } from '../services/climateService';
-import { CommandProps } from './types';
+import { getClimateValue, getForecast } from "../services/climateService";
+import { CommandProps } from "./types";
 
 export const climateCommands = {
   temp: async ({ bot, chatId, command }: CommandProps) => {
@@ -10,8 +10,7 @@ export const climateCommands = {
     } catch {
       bot.sendMessage(chatId, 'City nao localizada');
     }
-  },
-  previsao: async ({ bot, chatId, command }: CommandProps) => {
+  },previsao: async ({ bot, chatId, command }: CommandProps) => {
     const city = command.args;
 
     try {
