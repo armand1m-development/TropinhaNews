@@ -1,14 +1,29 @@
-import { getClimateValue } from "../services/climateService";
-import { CommandProps } from "./types";
+// import { getClimateValue } from "../services/climateService";
+// import { CommandProps } from "./types";
+
+// export const climateCommands = {
+//   temp: async ({ bot, chatId, command }: CommandProps) => {
+//     const city = command.args;
+//     try {
+//       const temperature = await getClimateValue(city || "");
+//       bot.sendMessage(chatId, `Temperatura de ${city}: ${temperature}ºC`);
+//     } catch {
+//       bot.sendMessage(chatId, "City nao localizada");
+//     }
+//   },
+// };
+
+import { getClimateValue } from '../services/climateService';
+import { CommandProps } from './types';
 
 export const climateCommands = {
   temp: async ({ bot, chatId, command }: CommandProps) => {
     const city = command.args;
     try {
-      const temperature = await getClimateValue(city || "");
-      bot.sendMessage(chatId, `Temperatura de ${city}: ${temperature}ºC`);
+      const { temperature, cityName } = await getClimateValue(city || '');
+      bot.sendMessage(chatId, `Temperatura de ${cityName}: ${temperature}ºC`);
     } catch {
-      bot.sendMessage(chatId, "City nao localizada");
+      bot.sendMessage(chatId, 'City nao localizada');
     }
   },
 };

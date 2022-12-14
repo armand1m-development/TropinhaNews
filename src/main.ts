@@ -2,11 +2,12 @@ import TelegramBot from "node-telegram-bot-api";
 require("dotenv").config();
 import express from "express";
 import cron from "node-cron";
-
 import { commands } from "./commands";
 import { Command } from "./commands/types";
 import path from "path";
 import { createReadStream } from "fs";
+import { bigdumbRoute } from "./routes/bigDumbRoute"
+import { disordersRoute } from "./routes/disorders"
 
 type CommandNames = keyof typeof commands;
 
@@ -29,7 +30,6 @@ bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const messageText = msg.text ?? "";
   const parsedCommand = commandParserRegex.exec(messageText) || undefined;
-
   const command: Command | undefined = parsedCommand && {
     full: messageText,
     name: parsedCommand[1],
@@ -50,7 +50,6 @@ bot.on("message", async (msg) => {
   Object.keys(commands).map(async (commandName) => {
     if (!!command && commandName === command.name) {
       const commandPayload = { bot, chatId, command, msg };
-
       try {
         await commands[commandName as CommandNames](commandPayload);
       } catch (error) {
@@ -68,6 +67,10 @@ app.get("/healthcheck", (_: any, res: any) => {
 app.listen(PORT ?? 5000, () => {
   console.log(`Bot running at http://0.0.0.0:${PORT}`);
 });
+
+app.get("/bigdumbs", bigdumbRoute);
+
+app.get("/disorders", disordersRoute);
 
 cron.schedule("0 0 8,12,16 * * *", () => {
   subscribed.map((chatId) => {

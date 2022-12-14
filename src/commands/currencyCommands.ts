@@ -1,9 +1,8 @@
 import { CommandProps } from "./types";
 import { currencySimultaneous } from "../services/currencyService";
-// import currency from "currency.js";
 
 export const currencyCommands = {
-  dolar: async ({ bot, chatId }: CommandProps) => {
+  dollar: async ({ bot, chatId }: CommandProps) => {
     const dollarValue = await currencySimultaneous.getDolarValue();
     bot.sendMessage(chatId, `Preço Dolar atual: ${dollarValue}`);
   },
@@ -28,7 +27,6 @@ export const currencyCommands = {
       "USD-BRL",
       false
     );
-    console.log(currentValue);
     const totalDoll = Number(currentValue) * dollarValue;
     bot.sendMessage(
       chatId,
