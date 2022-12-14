@@ -7,9 +7,6 @@ export const showCommands = {
         const onlyCommand = allCommands.map((command) => {            
             return `${command} \n`;
         })
-        for (let index in onlyCommand) {
-            console.log(onlyCommand[index]);  // output: Apple Orange Banana
-        }
         bot.sendMessage(chatId, `${onlyCommand}`);
     },
 }
