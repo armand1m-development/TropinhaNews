@@ -10,9 +10,9 @@ export const getClimateUrl = (city: MainCity) =>
 export const getClimateValue = async (city: MainCity) => {
   const url = getClimateUrl(city);
   const resultClimate = await axios.get(url);
-
   const temperature = resultClimate.data.main.temp;
-  return temperature;
+  const cityName = resultClimate.data.name;
+  return { temperature, cityName };
 };
 
 export type Forecast = {
